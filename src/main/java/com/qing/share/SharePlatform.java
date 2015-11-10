@@ -1,31 +1,16 @@
 package com.qing.share;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+
+import com.qing.share.content.ImageObject;
+import com.qing.share.content.MediaObject;
+import com.qing.share.content.TextObject;
 
 /**
  * Created by zwq on 2015/10/30 11:31.<br/><br/>
  * 所有分享平台都有实现此接口
  */
 public interface SharePlatform {
-
-    /**
-     * 分配给每个第三方应用的 app key
-     */
-    String getAppKey();
-
-    /**
-     * 第三方应用授权回调页面
-     */
-    String getRedirectUrl();
-//    /** 授权功能，（保留 新浪有些权限有限制）*/
-//    String getScope();
-
-    /**
-     * 表示用户身份的 token
-     */
-    String getAccessToken();
 
     /**
      * 是否安装了客户端
@@ -42,12 +27,8 @@ public interface SharePlatform {
      * 授权
      *
      * @param type        0:ALL IN ONE, 如果手机安装了客户端则使用客户端授权,没有则进行网页授权, 1:仅Web, 2:仅客户端
-     * @param context
-     * @param appKey
-     * @param redirectUrl
-     * @param scope       可以为null
      */
-    void authorize(int type, Context context, String appKey, String redirectUrl, String scope);
+    void authorize(int type);
 
     /**
      * 注册
@@ -81,81 +62,56 @@ public interface SharePlatform {
     /**
      * 文本消息对象。
      *
-     * @param text
+     * @param textObject
      */
-    void shareText(String text);
+    void shareText(TextObject textObject);
 
     /**
      * 图片消息对象。
      * 设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
      *
-     * @param bitmap
+     * @param imageObject
      */
-    void shareImage(Bitmap bitmap);
+    void shareImage(ImageObject imageObject);
 
     /**
      * 多媒体（网页）消息对象。
      *
-     * @param title
-     * @param description
-     * @param thumb       设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
-     * @param actionUrl
-     * @param defaultText Webpage 默认文案
+     * @param mediaObject (新浪微博设置缩略图时注意：最终压缩过的缩略图大小不得超过 32kb。)
      */
-    void shareWebPage(String title, String description, Bitmap thumb, String actionUrl, String defaultText);
+    void shareWebPage(MediaObject mediaObject);
 
     /**
      * 多媒体（音乐）消息对象。
      *
-     * @param title
-     * @param description
-     * @param thumb       设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
-     * @param actionUrl
-     * @param dataUrl
-     * @param dataHdUrl
-     * @param duration
-     * @param defaultText
+     * @param mediaObject (新浪微博设置缩略图时注意：最终压缩过的缩略图大小不得超过 32kb。)
      */
-    void shareMusic(String title, String description, Bitmap thumb, String actionUrl, String dataUrl, String dataHdUrl, int duration, String defaultText);
+    void shareMusic(MediaObject mediaObject);
 
     /**
      * 多媒体（视频）消息对象。
      *
-     * @param title
-     * @param description
-     * @param thumb       设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
-     * @param actionUrl
-     * @param dataUrl
-     * @param dataHdUrl
-     * @param duration
-     * @param defaultText
+     * @param mediaObject (新浪微博设置缩略图时注意：最终压缩过的缩略图大小不得超过 32kb。)
      */
-    void shareVideo(String title, String description, Bitmap thumb, String actionUrl, String dataUrl, String dataHdUrl, int duration, String defaultText);
+    void shareVideo(MediaObject mediaObject);
 
     /**
      * 多媒体（音频）消息对象。
      *
-     * @param title 标题
-     * @param description 描述
-     * @param thumb       设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
-     * @param actionUrl
-     * @param dataUrl
-     * @param dataHdUrl
-     * @param duration
-     * @param defaultText 默认文本
+     * @param mediaObject (新浪微博设置缩略图时注意：最终压缩过的缩略图大小不得超过 32kb。)
      */
-    void shareVoice(String title, String description, Bitmap thumb, String actionUrl, String dataUrl, String dataHdUrl, int duration, String defaultText);
+    void shareVoice(MediaObject mediaObject);
 
     /**
      * 第三方应用发送请求消息，唤起分享界面。
      * 只支持分享单条消息，即文本、图片、网页、音乐、视频中的一种，不支持Voice消息。
      */
-    boolean sendSingleMessage();
+    void sendSingleMessage();
 
     /**
      * 第三方应用发送请求消息，唤起分享界面。
      * 支持同时分享多条消息，同时可以分享文本、图片以及其它媒体资源（网页、音乐、视频、声音中的一种）。
      */
-    boolean sendMultiMessage();
+    void sendMultiMessage();
 
 }
