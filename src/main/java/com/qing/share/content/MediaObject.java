@@ -8,8 +8,6 @@ import android.graphics.Bitmap;
 public class MediaObject extends ShareObject {
 
     private static final String TAG = MediaObject.class.getName();
-    private String title;//标题
-    private String description;//描述
     private Bitmap thumb;//缩略图
     private String actionUrl;
     private String dataUrl;//数据源地址:sd卡目录、网络地址
@@ -70,14 +68,6 @@ public class MediaObject extends ShareObject {
         this.defaultText = defaultText;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public int getDuration() {
         return duration;
     }
@@ -92,14 +82,6 @@ public class MediaObject extends ShareObject {
 
     public void setThumb(Bitmap thumb) {
         this.thumb = thumb;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     @Override

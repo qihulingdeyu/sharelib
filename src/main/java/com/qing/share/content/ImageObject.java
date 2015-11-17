@@ -11,7 +11,6 @@ public class ImageObject extends ShareObject {
     private String path;//SD卡路径
     private String url;//网络地址
     private Bitmap bitmap;
-    private String description;
 
     public ImageObject() {
         objcetType = 1;
@@ -46,11 +45,4 @@ public class ImageObject extends ShareObject {
         this.path = path;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

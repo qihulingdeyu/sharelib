@@ -8,7 +8,6 @@ public class TextObject extends ShareObject {
     private static final String TAG = TextObject.class.getName();
 
     private String text;//文本
-    private String description;//描述
 
     public TextObject() {
         objcetType = 0;
@@ -22,14 +21,6 @@ public class TextObject extends ShareObject {
     public TextObject(String text, String description) {
         objcetType = 0;
         this.text = text;
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 

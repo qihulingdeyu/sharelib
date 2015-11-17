@@ -214,7 +214,9 @@ public class Share2Sina extends AbsSharePlatform implements IWeiboHandler.Respon
     @Override
     public void shareText(com.qing.share.content.TextObject textObject) {
         TextObject sinaTextObject = new TextObject();
+        sinaTextObject.identify = Utility.generateGUID();
         sinaTextObject.text = textObject.getText();
+        sinaTextObject.description = textObject.getDescription();
 
         initWeiboMultiMessage();
         weiboMultiMessage.textObject = sinaTextObject;
@@ -230,7 +232,10 @@ public class Share2Sina extends AbsSharePlatform implements IWeiboHandler.Respon
     @Override
     public void shareImage(com.qing.share.content.ImageObject imageObject) {
         ImageObject sinaImageObject = new ImageObject();
+        sinaImageObject.identify = Utility.generateGUID();
+        sinaImageObject.title = imageObject.getTitle();
         sinaImageObject.setImageObject(imageObject.getBitmap());
+        sinaImageObject.description = imageObject.getDescription();
 
         initWeiboMultiMessage();
         weiboMultiMessage.imageObject = sinaImageObject;
