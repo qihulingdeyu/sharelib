@@ -8,13 +8,12 @@ import android.media.ThumbnailUtils;
 
 import com.qing.callback.HttpCallback;
 import com.qing.log.MLog;
-import com.qing.share.AbsSharePlatform;
+import com.qing.share.SharePlatform;
 import com.qing.share.SharePlatformType;
 import com.qing.share.Utils;
 import com.qing.share.content.ImageObject;
 import com.qing.share.content.MediaObject;
 import com.qing.share.content.TextObject;
-import com.qing.utils.FileUtils;
 import com.qing.utils.ThreadUtils;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
@@ -38,7 +37,7 @@ import java.net.URL;
 /**
  * Created by zwq on 2015/10/30 17:16.<br/><br/>
  */
-public class Share2WeiXin extends AbsSharePlatform implements IWXAPIEventHandler {
+public class Share2WeiXin extends SharePlatform implements IWXAPIEventHandler {
 
     private static final String TAG = Share2WeiXin.class.getName();
     private static Share2WeiXin instance;

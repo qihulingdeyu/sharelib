@@ -3,7 +3,7 @@ package com.qing.share.platforms;
 import android.content.Context;
 import android.content.Intent;
 
-import com.qing.share.AbsSharePlatform;
+import com.qing.share.SharePlatform;
 import com.qing.share.SharePlatformType;
 import com.qing.share.content.ImageObject;
 import com.qing.share.content.MediaObject;
@@ -12,7 +12,7 @@ import com.qing.share.content.TextObject;
 /**
  * Created by zwq on 2015/11/04 17:45.<br/><br/>
  */
-public class Share2TengXun extends AbsSharePlatform {
+public class Share2TengXun extends SharePlatform {
 
     private static final String TAG = Share2TengXun.class.getName();
     private static Share2TengXun instance;

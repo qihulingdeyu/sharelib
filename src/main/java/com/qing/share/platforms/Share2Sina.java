@@ -6,13 +6,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.qing.log.MLog;
-import com.qing.share.AbsSharePlatform;
+import com.qing.share.SharePlatform;
 import com.qing.share.content.MediaObject;
 import com.qing.share.OauthInfo;
 import com.qing.share.listener.OauthListener;
 import com.qing.share.SharePlatformType;
 import com.qing.share.Utils;
-import com.qing.utils.StringUtils;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.MusicObject;
 import com.sina.weibo.sdk.api.TextObject;
@@ -36,15 +35,11 @@ import com.sina.weibo.sdk.constant.WBConstants;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.utils.Utility;
 
-import org.w3c.dom.Text;
-
-import java.util.Date;
-
 /**
  * Created by zwq on 2015/10/30 11:49.<br/><br/>
  * 分享到新浪<br/>
  */
-public class Share2Sina extends AbsSharePlatform implements IWeiboHandler.Response, IWeiboHandler.Request {
+public class Share2Sina extends SharePlatform implements IWeiboHandler.Response, IWeiboHandler.Request {
 
     private static final String TAG = Share2Sina.class.getName();
 
