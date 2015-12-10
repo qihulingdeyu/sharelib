@@ -10,8 +10,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.format.DateFormat;
-import android.util.Log;
 
+import com.qing.log.MLog;
 import com.qing.utils.StringUtils;
 
 import junit.framework.Assert;
@@ -36,10 +36,10 @@ public class Utils {
         try {
             os = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, os);
-            Log.d(TAG, "thumb size:" + os.toByteArray().length);
+            MLog.d(TAG, "thumb size:" + os.toByteArray().length);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d(TAG, "put thumb failed");
+            MLog.d(TAG, "put thumb failed");
         } finally {
             try {
                 if (os != null) {
@@ -92,10 +92,10 @@ public class Utils {
                 tmp = null;
             }
 
-            Log.d(TAG, "extractThumbNail: round=" + width + "x" + height + ", crop=" + crop);
+            MLog.d(TAG, "extractThumbNail: round=" + width + "x" + height + ", crop=" + crop);
             final double beY = options.outHeight * 1.0 / height;
             final double beX = options.outWidth * 1.0 / width;
-            Log.d(TAG, "extractThumbNail: extract beX = " + beX + ", beY = " + beY);
+            MLog.d(TAG, "extractThumbNail: extract beX = " + beX + ", beY = " + beY);
             options.inSampleSize = (int) (crop ? (beY > beX ? beX : beY) : (beY < beX ? beX : beY));
             if (options.inSampleSize <= 1) {
                 options.inSampleSize = 1;
@@ -124,14 +124,14 @@ public class Utils {
 
             options.inJustDecodeBounds = false;
 
-            Log.i(TAG, "bitmap required size=" + newWidth + "x" + newHeight + ", orig=" + options.outWidth + "x" + options.outHeight + ", sample=" + options.inSampleSize);
+            MLog.i(TAG, "bitmap required size=" + newWidth + "x" + newHeight + ", orig=" + options.outWidth + "x" + options.outHeight + ", sample=" + options.inSampleSize);
             Bitmap bm = BitmapFactory.decodeFile(path, options);
             if (bm == null) {
-                Log.e(TAG, "bitmap decode failed");
+                MLog.e(TAG, "bitmap decode failed");
                 return null;
             }
 
-            Log.i(TAG, "bitmap decoded size=" + bm.getWidth() + "x" + bm.getHeight());
+            MLog.i(TAG, "bitmap decoded size=" + bm.getWidth() + "x" + bm.getHeight());
             final Bitmap scale = Bitmap.createScaledBitmap(bm, newWidth, newHeight, true);
             if (scale != null) {
                 bm.recycle();
@@ -146,12 +146,12 @@ public class Utils {
 
                 bm.recycle();
                 bm = cropped;
-                Log.i(TAG, "bitmap croped size=" + bm.getWidth() + "x" + bm.getHeight());
+                MLog.i(TAG, "bitmap croped size=" + bm.getWidth() + "x" + bm.getHeight());
             }
             return bm;
 
         } catch (final OutOfMemoryError e) {
-            Log.e(TAG, "decode bitmap failed: " + e.getMessage());
+            MLog.e(TAG, "decode bitmap failed: " + e.getMessage());
             options = null;
         }
         return null;
@@ -190,7 +190,7 @@ public class Utils {
 
     public static String resolvePhotoFromIntent(final Context ctx, final Intent data, final String dir) {
         if (ctx == null || data == null || dir == null) {
-            Log.e(TAG, "resolvePhotoFromIntent fail, invalid argument");
+            MLog.e(TAG, "resolvePhotoFromIntent fail, invalid argument");
             return null;
         }
 
@@ -202,9 +202,9 @@ public class Utils {
             try {
                 cu.moveToFirst();
                 final int pathIndex = cu.getColumnIndex(MediaStore.MediaColumns.DATA);
-                Log.e(TAG, "orition: " + cu.getString(cu.getColumnIndex(MediaStore.Images.ImageColumns.ORIENTATION)));
+                MLog.e(TAG, "orition: " + cu.getString(cu.getColumnIndex(MediaStore.Images.ImageColumns.ORIENTATION)));
                 filePath = cu.getString(pathIndex);
-                Log.d(TAG, "photo from resolver, path:" + filePath);
+                MLog.d(TAG, "photo from resolver, path:" + filePath);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -215,7 +215,7 @@ public class Utils {
             if (!(new File(filePath)).exists()) {
                 filePath = null;
             }
-            Log.d(TAG, "photo file from data, path:" + filePath);
+            MLog.d(TAG, "photo file from data, path:" + filePath);
 
         } else if (data.getAction() != null && data.getAction().equals("inline-data")) {
 
@@ -234,7 +234,7 @@ public class Utils {
                 final int cQuality = 100;
                 bitmap.compress(Bitmap.CompressFormat.PNG, cQuality, out);
                 out.close();
-                Log.d(TAG, "photo image from data, path:" + filePath);
+                MLog.d(TAG, "photo image from data, path:" + filePath);
 
             } catch (final Exception e) {
                 e.printStackTrace();
@@ -245,7 +245,7 @@ public class Utils {
                 cu.close();
                 cu = null;
             }
-            Log.e(TAG, "resolve photo from intent failed");
+            MLog.e(TAG, "resolve photo from intent failed");
             return null;
         }
         if (cu != null) {

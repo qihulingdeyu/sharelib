@@ -21,7 +21,7 @@ public class Share {
     private static Share instance;
     private Context mContext;
     private static ShareView shareView;
-    private static HashMap<String, AbsSharePlatform> shareList;
+    private static HashMap<String, SharePlatform> shareList;
     private static HashMap<SharePlatformType, KeyInfo> keyInfoList;
     private SharePlatformType currentPlatformType;
 
@@ -37,6 +37,7 @@ public class Share {
     }
 
     private Share(){}
+
     private Share(Context context){
         mContext = context;
         shareList = new HashMap<>();
@@ -46,19 +47,21 @@ public class Share {
 
     public void addShare(SharePlatformType sharePlatformType, String appKey, String appSecret, String redirectUrl, String scope){
         if (!shareList.containsKey(sharePlatformType.getName())) {
-            AbsSharePlatform platform = null;
+            SharePlatform platform = null;
             switch (sharePlatformType){
                 case QQ:
+                case QZONE:
                     platform = Share2TengXun.getInstance(mContext);
                     break;
                 case WEIXIN:
+                case WEIXIN_PYQ:
                     platform = Share2WeiXin.getInstance(mContext);
                     break;
                 case SINA:
                     platform = Share2Sina.getInstance(mContext);
                     break;
                 default:
-                    break;
+                    throw new IllegalArgumentException("Currently does not support the platform");
             }
             if (platform != null) {
                 platform.setShareConfig(appKey, appSecret, redirectUrl, scope);
@@ -76,7 +79,7 @@ public class Share {
         }
     }
 
-    public AbsSharePlatform getSharePlatform(SharePlatformType sharePlatformType) {
+    public SharePlatform getSharePlatform(SharePlatformType sharePlatformType) {
         return getSharePlatform(sharePlatformType, true);
     }
 
@@ -85,8 +88,8 @@ public class Share {
      * @param initRes 是否初始化资源
      * @return
      */
-    public AbsSharePlatform getSharePlatform(SharePlatformType sharePlatformType, boolean initRes) {
-        AbsSharePlatform platform = null;
+    public SharePlatform getSharePlatform(SharePlatformType sharePlatformType, boolean initRes) {
+        SharePlatform platform = null;
         if (shareList != null) {
             platform = shareList.get(sharePlatformType.getName());
             if (platform != null) {
@@ -111,7 +114,7 @@ public class Share {
 
     public ShareListener getShareListener(SharePlatformType sharePlatformType) {
         ShareListener shareListener = null;
-        AbsSharePlatform platform = getSharePlatform(sharePlatformType, false);
+        SharePlatform platform = getSharePlatform(sharePlatformType, false);
         if (platform != null) {
             shareListener = platform.getShareListener();
         }
@@ -119,7 +122,7 @@ public class Share {
     }
 
     public void onNewIntent(Intent intent) {
-        AbsSharePlatform platform = getSharePlatform(currentPlatformType, false);
+        SharePlatform platform = getSharePlatform(currentPlatformType, false);
         if (platform != null) {
             platform.onNewIntent(intent);
         }
@@ -132,7 +135,7 @@ public class Share {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        AbsSharePlatform platform = getSharePlatform(currentPlatformType, false);
+        SharePlatform platform = getSharePlatform(currentPlatformType, false);
         if (platform != null) {
             platform.onActivityResult(requestCode, resultCode, data);
         }
