@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 import com.qing.log.MLog;
 import com.qing.qlib.LinearLayoutPage;
-import com.qing.share.AbsSharePlatform;
+import com.qing.share.SharePlatform;
 import com.qing.share.Share;
 import com.qing.share.SharePlatformType;
 import com.qing.share.content.ImageObject;
@@ -100,7 +100,7 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
         }
     }
 
-    private AbsSharePlatform sharePlatform = null;
+    private SharePlatform sharePlatform = null;
     private ShareObject shareObject = null;
 
     @Override
@@ -135,8 +135,9 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
             }else if (buttonView == shareViewHolder.image) {
                 Bitmap bitmap = FileUtils.getSDBitmap(FileUtils.getSDPath(), "hehua.jpg");
                 ImageObject imageObject = new ImageObject();
-//                imageObject.setBitmap(bitmap);
-                imageObject.setUrl("http://image17-c.poco.cn/jane_admin_img/20151028/PuzzleWall13217thumb1.jpg");
+                imageObject.setDescription("test/Image");
+                imageObject.setBitmap(bitmap);
+//                imageObject.setUrl("http://image17-c.poco.cn/jane_admin_img/20151028/PuzzleWall13217thumb1.jpg");
                 shareObject = imageObject;
 
             }else if (buttonView == shareViewHolder.webpage) {
