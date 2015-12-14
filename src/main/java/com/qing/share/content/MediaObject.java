@@ -9,39 +9,19 @@ public class MediaObject extends ShareObject {
 
     private static final String TAG = MediaObject.class.getName();
     private Bitmap thumb;//缩略图
-    private String actionUrl;
+    private String thumbUrl;
     private String dataUrl;//数据源地址:sd卡目录、网络地址
     private String dataHdUrl;
     private int duration = 10;
     private String defaultText;//默认文本
 
     public MediaObject() {
-        objcetType = 2;
+        objcetType = TYPE_MEDIA;
     }
 
     @Override
     public int getObjcetType() {
         return objcetType;
-    }
-
-    public MediaObject(String title, String description, Bitmap thumb, String actionUrl, String dataHdUrl, String dataUrl, int duration, String defaultText) {
-        objcetType = 2;
-        this.title = title;
-        this.description = description;
-        this.thumb = thumb;
-        this.actionUrl = actionUrl;
-        this.dataHdUrl = dataHdUrl;
-        this.dataUrl = dataUrl;
-        this.duration = duration;
-        this.defaultText = defaultText;
-    }
-
-    public String getActionUrl() {
-        return actionUrl;
-    }
-
-    public void setActionUrl(String actionUrl) {
-        this.actionUrl = actionUrl;
     }
 
     public String getDataHdUrl() {
@@ -84,6 +64,14 @@ public class MediaObject extends ShareObject {
         this.thumb = thumb;
     }
 
+    public String getThumbUrl() {
+        return thumbUrl;
+    }
+
+    public void setThumbUrl(String thumbUrl) {
+        this.thumbUrl = thumbUrl;
+    }
+
     @Override
     public String toString() {
         return "MediaObject{" +
@@ -91,6 +79,7 @@ public class MediaObject extends ShareObject {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", thumb=" + thumb +
+                ", thumbUrl=" + thumbUrl +
                 ", dataUrl='" + dataUrl + '\'' +
                 ", dataHdUrl='" + dataHdUrl + '\'' +
                 ", duration=" + duration +

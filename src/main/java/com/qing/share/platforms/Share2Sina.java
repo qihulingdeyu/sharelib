@@ -201,6 +201,11 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
         }
     }
 
+    @Override
+    public void shareApp(com.qing.share.content.TextObject textObject) {
+
+    }
+
     /**
      * 文本消息对象。
      *

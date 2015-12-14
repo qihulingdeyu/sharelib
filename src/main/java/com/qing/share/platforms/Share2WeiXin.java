@@ -141,6 +141,11 @@ public class Share2WeiXin extends SharePlatform implements IWXAPIEventHandler {
     }
 
     @Override
+    public void shareApp(TextObject textObject) {
+
+    }
+
+    @Override
     public void shareText(TextObject textObject) {
         // 初始化一个WXTextObject对象
         WXTextObject textObj = new WXTextObject();
@@ -334,7 +339,7 @@ public class Share2WeiXin extends SharePlatform implements IWXAPIEventHandler {
 
     @Override
     public void shareVoice(MediaObject mediaObject) {
-
+        unsupported();
     }
 
     @Override

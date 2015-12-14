@@ -13,7 +13,7 @@ public class ImageObject extends ShareObject {
     private Bitmap bitmap;
 
     public ImageObject() {
-        objcetType = 1;
+        objcetType = TYPE_IMAGE;
     }
 
     @Override

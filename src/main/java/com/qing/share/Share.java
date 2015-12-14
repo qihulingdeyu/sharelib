@@ -1,14 +1,18 @@
 package com.qing.share;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 
 import com.qing.log.MLog;
 import com.qing.share.listener.ShareListener;
 import com.qing.share.platforms.Share2Sina;
-import com.qing.share.platforms.Share2TengXun;
+import com.qing.share.platforms.Share2Tencent;
 import com.qing.share.platforms.Share2WeiXin;
 import com.qing.share.ui.ShareView;
+import com.qing.sharelib.R;
+import com.qing.sharelib.ShareDialogActivity;
 
 import java.util.HashMap;
 
@@ -51,7 +55,7 @@ public class Share {
             switch (sharePlatformType){
                 case QQ:
                 case QZONE:
-                    platform = Share2TengXun.getInstance(mContext);
+                    platform = Share2Tencent.getInstance(mContext);
                     break;
                 case WEIXIN:
                 case WEIXIN_PYQ:
@@ -72,10 +76,7 @@ public class Share {
                 throw new NullPointerException(sharePlatformType.getEN_Name()+" platform not initialize");
             }
 
-//        if (shareView==null){
-//            shareView = new ShareView(mContext);
-//        }
-//        shareView.addItem();
+            addItemView(platform);
         }
     }
 
@@ -128,16 +129,52 @@ public class Share {
         }
     }
 
-    public static void show(){
-        if (shareView!=null){
-
-        }
-    }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         SharePlatform platform = getSharePlatform(currentPlatformType, false);
         if (platform != null) {
             platform.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    public void addDefaultView() {
+        if (shareList != null) {
+            for (int i = 0; i < shareList.size(); i++) {
+                addItemView(shareList.get(i));
+            }
+        }
+    }
+
+    public void addItemView(SharePlatform platform) {
+        if (platform == null) return;
+        if (shareView == null){
+            shareView = new ShareView(mContext);
+        }
+        switch (platform.getPlatformType()) {
+            case QQ:
+            case QZONE:
+                shareView.addItem(SharePlatformType.QQ.getCN_Name(), R.mipmap.share_qq_normal, R.mipmap.share_qq_pressed);
+                shareView.addItem(SharePlatformType.QZONE.getCN_Name(), R.mipmap.share_qqkj_normal, R.mipmap.share_qqkj_pressed);
+                break;
+            case WEIXIN:
+            case WEIXIN_PYQ:
+                shareView.addItem(SharePlatformType.WEIXIN.getCN_Name(), R.mipmap.share_weixin_normal, R.mipmap.share_weixin_pressed);
+                shareView.addItem(SharePlatformType.WEIXIN_PYQ.getCN_Name(), R.mipmap.share_weixinpyq_normal, R.mipmap.share_weixinpyq_pressed);
+                break;
+            case SINA:
+                shareView.addItem(SharePlatformType.SINA.getCN_Name(), R.mipmap.share_sina_normal, R.mipmap.share_sina_pressed);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public View getShareView() {
+        return shareView;
+    }
+
+    public void show(){
+        if (shareView != null){
+            ((Activity)mContext).startActivity(new Intent(mContext, ShareDialogActivity.class));
         }
     }
 

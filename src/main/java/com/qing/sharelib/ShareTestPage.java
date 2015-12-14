@@ -92,11 +92,12 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
                 sharePlatform.sendMultiMessage();
             }
         }else if (v == shareViewHolder.other_btn){
-            if (sharePlatform != null) {
-                sharePlatform.setShareListener(new MShareListener());
-                sharePlatform.authorize();
-//                UIUtils.showToast(getContext(), "app install:"+sharePlatform.isAppInstalled());
-            }
+//            if (sharePlatform != null) {
+//                sharePlatform.setShareListener(new MShareListener());
+//                sharePlatform.authorize();
+////                UIUtils.showToast(getContext(), "app install:"+sharePlatform.isAppInstalled());
+//            }
+            share.show();
         }
     }
 
@@ -129,7 +130,10 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
 
             if (buttonView == shareViewHolder.text) {
                 MLog.i("bbb", "onCheckedChanged  text");
-                TextObject textObject = new TextObject("test/Text", "描述");
+                TextObject textObject = new TextObject();
+                textObject.setTitle("title");
+                textObject.setText("test/Text");
+                textObject.setDescription("描述");
                 shareObject = textObject;
 
             }else if (buttonView == shareViewHolder.image) {
@@ -137,6 +141,7 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
                 ImageObject imageObject = new ImageObject();
                 imageObject.setDescription("test/Image");
                 imageObject.setBitmap(bitmap);
+                imageObject.setPath(FileUtils.getSDPath()+ "hehua.jpg");
 //                imageObject.setUrl("http://image17-c.poco.cn/jane_admin_img/20151028/PuzzleWall13217thumb1.jpg");
                 shareObject = imageObject;
 

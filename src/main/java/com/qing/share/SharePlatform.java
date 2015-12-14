@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import com.qing.share.content.ImageObject;
 import com.qing.share.content.MediaObject;
 import com.qing.share.content.TextObject;
 import com.qing.share.listener.OauthListener;
 import com.qing.share.listener.ShareListener;
+import com.qing.sharelib.R;
 
 /**
  * Created by zwq on 2015/10/30 11:52.<br/><br/>
@@ -68,6 +71,15 @@ public abstract class SharePlatform {
         return getActivity().getIntent();
     }
 
+    protected String getAppName() {
+        if (mContext != null) {
+            PackageManager packageManager = mContext.getPackageManager();
+            PackageInfo packageInfo = packageManager.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES).get(0);
+            return packageInfo.applicationInfo.loadLabel(packageManager).toString();
+        }
+        return null;
+    }
+
     public void setShareConfig(String appKey, String appSecret, String redirectUrl, String scope) {
         this.appKey = appKey;
         this.appSecret = appSecret;
@@ -117,6 +129,10 @@ public abstract class SharePlatform {
 
     public ShareListener getShareListener() {
         return mShareListener;
+    }
+
+    public final void unsupported() {
+        throw new IllegalArgumentException("This is not supported by the operating in the current platform");
     }
 
     /**
@@ -176,7 +192,7 @@ public abstract class SharePlatform {
     public abstract void logout();
 
     /**
-     *
+     *   QQ：（0：QQ，1：QZone）
      * 微信：（0：好友，1：朋友圈）
      * @param where
      */
@@ -185,6 +201,12 @@ public abstract class SharePlatform {
     public int getSendMessageToWhere() {
         return sendMessageToWhere;
     }
+
+    /**
+     * 分享应用
+     * @param textObject
+     */
+    public abstract void shareApp(TextObject textObject);
 
     /**
      * 文本消息对象。
@@ -264,4 +286,5 @@ public abstract class SharePlatform {
      * 清除所有资源
      */
     public abstract void clearAll();
+
 }

@@ -10,18 +10,12 @@ public class TextObject extends ShareObject {
     private String text;//文本
 
     public TextObject() {
-        objcetType = 0;
+        objcetType = TYPE_TEXT;
     }
 
     @Override
     public int getObjcetType() {
         return objcetType;
-    }
-
-    public TextObject(String text, String description) {
-        objcetType = 0;
-        this.text = text;
-        this.description = description;
     }
 
     public String getText() {

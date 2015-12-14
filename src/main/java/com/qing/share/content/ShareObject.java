@@ -1,16 +1,24 @@
 package com.qing.share.content;
 
+import android.text.TextUtils;
+
 /**
  * Created by zwq on 2015/11/05 15:51.<br/><br/>
  */
 public abstract class ShareObject {
 
     private static final String TAG = ShareObject.class.getName();
-    protected int objcetType;//0：文本，1：图片，2：其它多媒体
+    public static final int TYPE_TEXT = 0;//0：文本
+    public static final int TYPE_IMAGE = 1;//1：图片
+    public static final int TYPE_MEDIA = 2;//2：其它多媒体
+
+    protected int objcetType;
 
     protected String identify;
     protected String title;
     protected String description;//描述
+    /** 点击跳转链接 */
+    protected String actionUrl;
 
     public ShareObject() {
 
@@ -31,6 +39,9 @@ public abstract class ShareObject {
     }
 
     public String getTitle() {
+        if (TextUtils.isEmpty(title)) {
+            title = "Title";
+        }
         return title;
     }
 
@@ -44,5 +55,16 @@ public abstract class ShareObject {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getActionUrl() {
+        if (TextUtils.isEmpty(actionUrl) || !actionUrl.startsWith("http://")) {
+            actionUrl = "http://www.baidu.com/";
+        }
+        return actionUrl;
+    }
+
+    public void setActionUrl(String actionUrl) {
+        this.actionUrl = actionUrl;
     }
 }

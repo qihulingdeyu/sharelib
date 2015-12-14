@@ -25,19 +25,19 @@ public enum SharePlatformType {
         String name = "";
         switch (mType) {
             case 1:
-                name = "QQ";
+                name = "QQ好友";
                 break;
             case 2:
-                name = "QZone";
+                name = "QQ空间";
                 break;
             case 3:
-                name = "微信";
+                name = "微信好友";
                 break;
             case 4:
-                name = "朋友圈";
+                name = "微信朋友圈";
                 break;
             case 5:
-                name = "新浪";
+                name = "新浪微博";
                 break;
             default:
                 break;
