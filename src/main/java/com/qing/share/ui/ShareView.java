@@ -2,6 +2,7 @@ package com.qing.share.ui;
 
 import android.content.Context;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -26,6 +27,7 @@ public class ShareView extends LinearLayout {
     private void initView() {
         setOrientation(LinearLayout.HORIZONTAL);
         setGravity(Gravity.CENTER_VERTICAL);
+        setPadding(0, 0, UIUtils.getRealPixel720(50), 0);
 
         lParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lParams.setMargins(UIUtils.getRealPixel720(50), UIUtils.getRealPixel720(20), 0, 0);
@@ -36,5 +38,15 @@ public class ShareView extends LinearLayout {
         itemView.setName(name);
         itemView.setIcon(normal, pressed);
         addView(itemView, lParams);
+    }
+
+    public View addItem(int id, String name, int normal, int pressed, View.OnClickListener clickListener){
+        ItemView itemView = new ItemView(mContext);
+        itemView.setId(id);
+        itemView.setName(name);
+        itemView.setIcon(normal, pressed);
+        itemView.setOnClickListener(clickListener);
+        addView(itemView, lParams);
+        return itemView;
     }
 }

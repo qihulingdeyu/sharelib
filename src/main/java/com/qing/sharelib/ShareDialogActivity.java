@@ -17,6 +17,7 @@ import com.qing.share.Share;
 
 public class ShareDialogActivity extends Activity implements View.OnClickListener{
 
+    private static final String TAG = ShareDialogActivity.class.getName();
     private LinearLayout share_empty;
     private HorizontalScrollView share_content;
     private Button share_cancel;
@@ -34,12 +35,16 @@ public class ShareDialogActivity extends Activity implements View.OnClickListene
         share_cancel.setOnClickListener(this);
 
         mShare = Share.getInstance(this);
+        mShare.initSharePlatform(this);
+        mShare.addDefaultView();
+
         share_content.removeAllViewsInLayout();
         share_content.addView(mShare.getShareView());
     }
 
     @Override
     public void onNewIntent(Intent intent) {
+//        MLog.i(TAG, "---onNewIntent--dialog-");
         if (mShare != null) {
             mShare.onNewIntent(intent);
         }
@@ -48,6 +53,7 @@ public class ShareDialogActivity extends Activity implements View.OnClickListene
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        MLog.i(TAG, "---onActivityResult--dialog-");
         if (mShare != null) {
             mShare.onActivityResult(requestCode, resultCode, data);
         }
@@ -57,18 +63,21 @@ public class ShareDialogActivity extends Activity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v == share_empty || v == share_cancel) {
-            finish();
+            onBackPressed();
         }
-//        if (v == share_cancel) {
-//            onBackPressed();
-//        }
     }
 
     @Override
     public void finish() {
+//        MLog.i(TAG, "---finish--dialog-");
         super.finish();
+        overridePendingTransition(R.anim.anim_close_enter, R.anim.anim_close_exit);
+
         if (share_content != null) {
             share_content.removeAllViewsInLayout();
+        }
+        if (mShare != null) {
+            mShare.removeAllViews();
         }
     }
 }

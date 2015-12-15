@@ -31,7 +31,6 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
 
     private static final String TAG = ShareTestPage.class.getName();
 
-    public static final String YM_ID = "5512c06afd98c5c6c30007da";
     public static final String WX_ID = "wx8b24fa7265b37a21";
     public static final String WX_SECRET = "9834fc0d74deef17ca234fef8d8108eb";
     public static final String SINA_ID = "3521624443";
@@ -39,8 +38,6 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
 
     public static final String QQ_ID = "1104432153";
     public static final String QQ_SECRET = "vUvWjtvskoEu906P";
-    public static final String QQZONE_ID = "";
-    public static final String QQZONE_SECRET = "";
 
     private ShareViewHolder shareViewHolder;
     private Share share;
@@ -59,15 +56,18 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
 
 
         share = Share.getInstance(getContext());
-        share.addShare(SharePlatformType.SINA, SINA_ID, SINA_SECRET, "https://api.weibo.com/oauth2/default.html", null);
-        share.addShare(SharePlatformType.WEIXIN, WX_ID, WX_SECRET, "", null);
         share.addShare(SharePlatformType.QQ, QQ_ID, QQ_SECRET, "", null);
+        share.addShare(SharePlatformType.WEIXIN, WX_ID, WX_SECRET, "", null);
+        share.addShare(SharePlatformType.SINA, SINA_ID, SINA_SECRET, "https://api.weibo.com/oauth2/default.html", null);
+
+        share.setShareListener(new MShareListener());
+        share.setOauthListener(new MOauthListener());
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
     @Override
     public void onClick(View v) {
-//        MLog.i("bbb", "--onClick--");
+//        MLog.i(TAG, "--onClick--");
 //        String text = shareViewHolder.input_text.getText().toString();
 //        if (TextUtils2.isNullOrEmpty(text)){
 //            UIUtils.showToast(getContext(), "文本不能为空");
@@ -78,7 +78,7 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
         }else if (v == shareViewHolder.send_btn){
             if (sharePlatform != null) {
                 String msg = sharePlatform.getPlatformType().getName();
-                        MLog.i("bbb", "onclick single msg:" + msg);
+                        MLog.i(TAG, "onclick single msg:" + msg);
                 sharePlatform.setShareListener(new MShareListener());
                 sharePlatform.setOauthListener(new MOauthListener());
                 sharePlatform.sendSingleMessage();
@@ -86,7 +86,7 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
         }else if (v == shareViewHolder.send_btn2){
             if (sharePlatform != null) {
                 String msg = sharePlatform.getPlatformType().getName();
-                MLog.i("bbb", "onclick multi msg:" + msg);
+                MLog.i(TAG, "onclick multi msg:" + msg);
                 sharePlatform.setShareListener(new MShareListener());
                 sharePlatform.setOauthListener(new MOauthListener());
                 sharePlatform.sendMultiMessage();
@@ -106,30 +106,30 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//        MLog.i("bbb", "--onCheckedChanged--");
+//        MLog.i(TAG, "--onCheckedChanged--");
         if (isChecked) {
-            if (buttonView == shareViewHolder.QQ){
-                sharePlatform = share.getSharePlatform(SharePlatformType.QQ);
-                sharePlatform.setSendMessageToWhere(0);
-
-            }else if (buttonView == shareViewHolder.QZone){
-                sharePlatform = share.getSharePlatform(SharePlatformType.QQ);
-                sharePlatform.setSendMessageToWhere(1);
-
-            }else if (buttonView == shareViewHolder.WeiXin){
-                sharePlatform = share.getSharePlatform(SharePlatformType.WEIXIN);
-                sharePlatform.setSendMessageToWhere(0);
-
-            }else if (buttonView == shareViewHolder.WeiXin_PYQ){
-                sharePlatform = share.getSharePlatform(SharePlatformType.WEIXIN);
-                sharePlatform.setSendMessageToWhere(1);
-
-            }else if (buttonView == shareViewHolder.Sina){
-                sharePlatform = share.getSharePlatform(SharePlatformType.SINA);
-            }
+//            if (buttonView == shareViewHolder.QQ){
+//                sharePlatform = share.getSharePlatform(SharePlatformType.QQ);
+//                sharePlatform.setSendMessageToWhere(0);
+//
+//            }else if (buttonView == shareViewHolder.QZone){
+//                sharePlatform = share.getSharePlatform(SharePlatformType.QQ);
+//                sharePlatform.setSendMessageToWhere(1);
+//
+//            }else if (buttonView == shareViewHolder.WeiXin){
+//                sharePlatform = share.getSharePlatform(SharePlatformType.WEIXIN);
+//                sharePlatform.setSendMessageToWhere(0);
+//
+//            }else if (buttonView == shareViewHolder.WeiXin_PYQ){
+//                sharePlatform = share.getSharePlatform(SharePlatformType.WEIXIN);
+//                sharePlatform.setSendMessageToWhere(1);
+//
+//            }else if (buttonView == shareViewHolder.Sina){
+//                sharePlatform = share.getSharePlatform(SharePlatformType.SINA);
+//            }
 
             if (buttonView == shareViewHolder.text) {
-                MLog.i("bbb", "onCheckedChanged  text");
+                MLog.i(TAG, "onCheckedChanged  text");
                 TextObject textObject = new TextObject();
                 textObject.setTitle("title");
                 textObject.setText("test/Text");
@@ -163,21 +163,24 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
             }else if (buttonView == shareViewHolder.voice) {
 
             }
-            if(shareObject != null && sharePlatform != null) {
-                MLog.i("bbb", "onCheckedChanged  sharePlatform type:" + sharePlatform.getPlatformType().getName()+", ObjcetType:"+shareObject.getObjcetType());
-                switch (shareObject.getObjcetType()) {
-                    case 0:
-                        sharePlatform.shareText((TextObject) shareObject);
-                        break;
-                    case 1:
-                        sharePlatform.shareImage((ImageObject) shareObject);
-                        break;
-                    case 2:
-                        sharePlatform.shareWebPage((MediaObject) shareObject);
-                        break;
-                    default:
-                        break;
-                }
+            if(shareObject != null) {
+//            if(shareObject != null && sharePlatform != null) {
+//                MLog.i(TAG, "onCheckedChanged  sharePlatform type:" + sharePlatform.getPlatformType().getName()+", ObjcetType:"+shareObject.getObjcetType());
+//                switch (shareObject.getObjcetType()) {
+//                    case 0:
+//                        sharePlatform.shareText((TextObject) shareObject);
+//                        break;
+//                    case 1:
+//                        sharePlatform.shareImage((ImageObject) shareObject);
+//                        break;
+//                    case 2:
+//                        sharePlatform.shareWebPage((MediaObject) shareObject);
+//                        break;
+//                    default:
+//                        break;
+//                }
+
+                share.setShareObject(shareObject);
             }
         }
 
@@ -187,34 +190,34 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
 
         @Override
         public void onOauthSuccess(SharePlatformType sharePlatformType, Bundle bundle) {
-            MLog.i("bbb", "---onShareSuccess---" + sharePlatformType.getName());
+            MLog.i(TAG, "---onShareSuccess---" + sharePlatformType.getName());
         }
 
         @Override
         public void onOauthFail(String msg) {
-            MLog.i("bbb", "---onOauthFail---"+msg);
+            MLog.i(TAG, "---onOauthFail---"+msg);
         }
 
         @Override
         public void onOauthCancel() {
-            MLog.i("bbb", "---onOauthCancel---");
+            MLog.i(TAG, "---onOauthCancel---");
         }
     }
 
     class MShareListener implements ShareListener {
         @Override
         public void onShareSuccess(SharePlatformType sharePlatformType, Bundle bundle) {
-            MLog.i("bbb", "---onShareSuccess---"+sharePlatformType.getName());
+            MLog.i(TAG, "---onShareSuccess---"+sharePlatformType.getName());
         }
 
         @Override
         public void onShareFail(String msg) {
-            MLog.i("bbb", "---onShareFail---"+msg);
+            MLog.i(TAG, "---onShareFail---"+msg);
         }
 
         @Override
         public void onShareCancel() {
-            MLog.i("bbb", "---onShareCancel---");
+            MLog.i(TAG, "---onShareCancel---");
         }
     }
 
@@ -255,19 +258,19 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
 
     @Override
     public void onNewIntent(Intent intent) {
-        MLog.i("bbb", "--onNewIntent--:");
-        if (share != null) {
-            share.onNewIntent(intent);
-        }
+        MLog.i(TAG, "--onNewIntent-->");
+//        if (share != null) {
+//            share.onNewIntent(intent);
+//        }
     }
 
     @Override
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-        MLog.i("bbb", "--onActivityResult--:");
-        if (share != null) {
-            share.onActivityResult(requestCode, resultCode, data);
-        }
-        return true;
+        MLog.i(TAG, "--onActivityResult-->");
+//        if (share != null) {
+//            share.onActivityResult(requestCode, resultCode, data);
+//        }
+        return false;
     }
 
     @Override

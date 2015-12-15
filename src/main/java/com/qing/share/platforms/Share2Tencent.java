@@ -30,7 +30,6 @@ import java.util.ArrayList;
 public class Share2Tencent extends SharePlatform implements IUiListener {
 
     private static final String TAG = Share2Tencent.class.getName();
-    private static Share2Tencent instance;
 
     private Tencent mTencent;
     private Bundle messageBundle;
@@ -42,14 +41,7 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
     }
 
     public static Share2Tencent getInstance(Context context) {
-        if (instance == null) {
-            synchronized (Share2Tencent.class) {
-                if (instance == null) {
-                    instance = new Share2Tencent(context);
-                }
-            }
-        }
-        return instance;
+        return new Share2Tencent(context);
     }
 
     @Override
@@ -116,8 +108,8 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
         textBundle.putString(QQShare.SHARE_TO_QQ_TARGET_URL, textObject.getActionUrl());
         textBundle.putString(QQShare.SHARE_TO_QQ_SUMMARY, textObject.getText());
 //        textBundle.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, "http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
-        textBundle.putString(QQShare.SHARE_TO_QQ_APP_NAME, getAppName());
-        textBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
+//        textBundle.putString(QQShare.SHARE_TO_QQ_APP_NAME, getAppName());
+//        textBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
 
         messageBundle = textBundle;
         currentMessageObjectType = textObject.getObjcetType();
@@ -133,8 +125,8 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
         textBundle.putString(QQShare.SHARE_TO_QQ_SUMMARY, textObject.getText());
 //        textBundle.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, "http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
 
-        textBundle.putString(QQShare.SHARE_TO_QQ_APP_NAME,  getAppName());
-        textBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
+//        textBundle.putString(QQShare.SHARE_TO_QQ_APP_NAME,  getAppName());
+//        textBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
 
         messageBundle = textBundle;
         currentMessageObjectType = textObject.getObjcetType();
@@ -156,8 +148,8 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
             imageBundle.putString(QQShare.SHARE_TO_QQ_TARGET_URL, imageObject.getActionUrl());
         }
 
-        imageBundle.putString(QQShare.SHARE_TO_QQ_APP_NAME, getAppName());
-        imageBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
+//        imageBundle.putString(QQShare.SHARE_TO_QQ_APP_NAME, getAppName());
+//        imageBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
 
         messageBundle = imageBundle;
         currentMessageObjectType = imageObject.getObjcetType();
@@ -183,8 +175,8 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
         musicBundle.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, mediaObject.getThumbUrl());//缩略图
         musicBundle.putString(QQShare.SHARE_TO_QQ_SUMMARY, mediaObject.getDescription());
 
-        musicBundle.putString(QQShare.SHARE_TO_QQ_APP_NAME, getAppName());
-        musicBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
+//        musicBundle.putString(QQShare.SHARE_TO_QQ_APP_NAME, getAppName());
+//        musicBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
 
         messageBundle = musicBundle;
         currentMessageObjectType = mediaObject.getObjcetType();
@@ -235,6 +227,9 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
                     return;
                 }
             }
+            messageBundle.putString(QQShare.SHARE_TO_QQ_APP_NAME, getAppName());
+            messageBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
+
             if (getPlatformType() == SharePlatformType.QZONE
                     && currentMessageObjectType == ShareObject.TYPE_MEDIA
                     && messageBundle.getInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE) == QzonePublish.PUBLISH_TO_QZONE_TYPE_PUBLISHVIDEO) {
@@ -252,11 +247,12 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
 
     @Override
     public void onNewIntent(Intent intent) {
-
+//        MLog.i(TAG, "---onNewIntent---");
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        MLog.i(TAG, "---onActivityResult---");
         if (requestCode == Constants.REQUEST_QQ_SHARE) {
             Tencent.onActivityResultData(requestCode, resultCode, data, this);
         }

@@ -40,7 +40,6 @@ import java.net.URL;
 public class Share2WeiXin extends SharePlatform implements IWXAPIEventHandler {
 
     private static final String TAG = Share2WeiXin.class.getName();
-    private static Share2WeiXin instance;
 
     // IWXAPI 是第三方app和微信通信的openapi接口
     private IWXAPI api;
@@ -59,14 +58,7 @@ public class Share2WeiXin extends SharePlatform implements IWXAPIEventHandler {
     }
 
     public static Share2WeiXin getInstance(Context context) {
-        if (instance == null) {
-            synchronized (Share2WeiXin.class) {
-                if (instance == null) {
-                    instance = new Share2WeiXin(context);
-                }
-            }
-        }
-        return instance;
+        return new Share2WeiXin(context);
     }
 
     @Override

@@ -17,6 +17,10 @@ public enum SharePlatformType {
         mType = type;
     }
 
+    public int getType() {
+        return mType;
+    }
+
     public String getName() {
         return getCN_Name();
     }

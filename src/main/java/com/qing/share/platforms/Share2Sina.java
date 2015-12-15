@@ -58,7 +58,6 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
     private int currentMessageObjectType;
     private boolean shareSuccess;
 
-    private static Share2Sina instance;
 
     private Share2Sina(Context context) {
         super(context);
@@ -66,14 +65,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
     }
 
     public static Share2Sina getInstance(Context context) {
-        if (instance == null) {
-            synchronized (Share2Sina.class) {
-                if (instance == null) {
-                    instance = new Share2Sina(context);
-                }
-            }
-        }
-        return instance;
+        return new Share2Sina(context);
     }
 
     @Override
