@@ -2,12 +2,11 @@ package com.qing.share.ui;
 
 import android.content.Context;
 import android.view.Gravity;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qing.ui.SelectorButton;
-import com.qing.utils.UIUtils;
+import com.qing.utils.UIUtil;
 
 /**
  * Created by zwq on 2015/08/26 17:36.<br/><br/>
@@ -32,7 +31,7 @@ public class ItemView extends LinearLayout {
         this.setOrientation(LinearLayout.VERTICAL);
         this.setGravity(Gravity.CENTER_HORIZONTAL);
 
-        LayoutParams lParams = new LayoutParams(UIUtils.getRealPixel720(120), UIUtils.getRealPixel720(120));
+        LayoutParams lParams = new LayoutParams(UIUtil.getRealPixel720(120), UIUtil.getRealPixel720(120));
         icon = new SelectorButton(mContext);
         addView(icon, lParams);
 

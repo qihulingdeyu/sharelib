@@ -4,9 +4,8 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
-import com.qing.utils.UIUtils;
+import com.qing.utils.UIUtil;
 
 /**
  * Created by zwq on 2015/08/26 17:50.<br/><br/>
@@ -27,10 +26,10 @@ public class ShareView extends LinearLayout {
     private void initView() {
         setOrientation(LinearLayout.HORIZONTAL);
         setGravity(Gravity.CENTER_VERTICAL);
-        setPadding(0, 0, UIUtils.getRealPixel720(50), 0);
+        setPadding(0, 0, UIUtil.getRealPixel720(50), 0);
 
         lParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        lParams.setMargins(UIUtils.getRealPixel720(50), UIUtils.getRealPixel720(20), 0, 0);
+        lParams.setMargins(UIUtil.getRealPixel720(50), UIUtil.getRealPixel720(20), 0, 0);
     }
 
     public void addItem(String name, int normal, int pressed){

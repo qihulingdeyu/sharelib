@@ -22,7 +22,7 @@ import com.qing.share.content.ShareObject;
 import com.qing.share.content.TextObject;
 import com.qing.share.listener.OauthListener;
 import com.qing.share.listener.ShareListener;
-import com.qing.utils.FileUtils;
+import com.qing.utils.FileUtil;
 
 /**
  * Created by zwq on 2015/10/31 21:05.<br/><br/>
@@ -70,7 +70,7 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
 //        MLog.i(TAG, "--onClick--");
 //        String text = shareViewHolder.input_text.getText().toString();
 //        if (TextUtils2.isNullOrEmpty(text)){
-//            UIUtils.showToast(getContext(), "文本不能为空");
+//            UIUtil.showToast(getContext(), "文本不能为空");
 //            return;
 //        }
         if (v == shareViewHolder.clear_btn){
@@ -95,7 +95,7 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
 //            if (sharePlatform != null) {
 //                sharePlatform.setShareListener(new MShareListener());
 //                sharePlatform.authorize();
-////                UIUtils.showToast(getContext(), "app install:"+sharePlatform.isAppInstalled());
+////                UIUtil.showToast(getContext(), "app install:"+sharePlatform.isAppInstalled());
 //            }
             share.show();
         }
@@ -137,16 +137,16 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
                 shareObject = textObject;
 
             }else if (buttonView == shareViewHolder.image) {
-                Bitmap bitmap = FileUtils.getSDBitmap(FileUtils.getSDPath(), "hehua.jpg");
+                Bitmap bitmap = FileUtil.getSDBitmap(FileUtil.getSDPath(), "hehua.jpg");
                 ImageObject imageObject = new ImageObject();
                 imageObject.setDescription("test/Image");
                 imageObject.setBitmap(bitmap);
-                imageObject.setPath(FileUtils.getSDPath()+ "hehua.jpg");
+                imageObject.setPath(FileUtil.getSDPath()+ "hehua.jpg");
 //                imageObject.setUrl("http://image17-c.poco.cn/jane_admin_img/20151028/PuzzleWall13217thumb1.jpg");
                 shareObject = imageObject;
 
             }else if (buttonView == shareViewHolder.webpage) {
-                Bitmap bitmap = FileUtils.getSDBitmap(FileUtils.getSDPath(), "2608.bmp");
+                Bitmap bitmap = FileUtil.getSDBitmap(FileUtil.getSDPath(), "2608.bmp");
                 MediaObject mediaObject = new MediaObject();
                 mediaObject.setTitle("test/WebPage");
                 mediaObject.setDescription("描述");

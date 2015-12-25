@@ -14,7 +14,7 @@ import com.qing.share.Utils;
 import com.qing.share.content.ImageObject;
 import com.qing.share.content.MediaObject;
 import com.qing.share.content.TextObject;
-import com.qing.utils.ThreadUtils;
+import com.qing.utils.ThreadUtil;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
@@ -204,7 +204,7 @@ public class Share2WeiXin extends SharePlatform implements IWXAPIEventHandler {
                 public void onFail(String msg) {
                 }
             };
-            ThreadUtils threadUtils = new ThreadUtils() {
+            ThreadUtil threadUtils = new ThreadUtil() {
                 InputStream is = null;
                 @Override
                 public void execute() {
@@ -260,7 +260,7 @@ public class Share2WeiXin extends SharePlatform implements IWXAPIEventHandler {
                 imgObj = null;
                 return false;
             }
-//            FileUtils.write2SD(bitmap, FileUtils.getSDPath()+"123.jpg", true, false);
+//            FileUtil.write2SD(bitmap, FileUtil.getSDPath()+"123.jpg", true, false);
             WXMediaMessage msg = new WXMediaMessage();
             msg.mediaObject = imgObj;
             msg.thumbData = Utils.bitmapToByteArray(bitmap, true);  // 设置缩略图 The file size should be within 32KB.
@@ -402,7 +402,7 @@ public class Share2WeiXin extends SharePlatform implements IWXAPIEventHandler {
             case 0x101:
 
 //                final WXAppExtendObject appdata = new WXAppExtendObject();
-//                final String path = Utils.getResultPhotoPath(mContext, data, FileUtils.getSDPath() + "sharelib/");
+//                final String path = Utils.getResultPhotoPath(mContext, data, FileUtil.getSDPath() + "sharelib/");
 //                appdata.filePath = path;
 //                appdata.extInfo = "this is ext info";
 //

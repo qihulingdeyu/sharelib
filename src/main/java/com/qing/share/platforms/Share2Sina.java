@@ -428,10 +428,10 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
                 // 1447147788200
                 //检查授权是否过期
 //                long t = Long.parseLong("1604827356269");//oauthInfo.getExpiresIn());
-//                        String d = StringUtils.getDateTime("yyyyMMdd HHmmss", new Date(t));
+//                        String d = StringUtil.getDateTime("yyyyMMdd HHmmss", new Date(t));
 //                long ct = new Date().getTime();
 //                long abs = System.currentTimeMillis();//t - ct;
-//                String d2 = StringUtils.getDateTime("yyyyMMdd HHmmss", new Date(abs));
+//                String d2 = StringUtil.getDateTime("yyyyMMdd HHmmss", new Date(abs));
 //                MLog.i("bbb", System.currentTimeMillis()+", t:"+t+", 检查授权是否过期:"+d + ", ct:"+ ct+", abs:"+abs+" d2:"+d2);
 
             }
