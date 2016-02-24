@@ -5,7 +5,7 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.qing.ui.SelectorButton;
+import com.qing.widget.SelectorButton;
 import com.qing.utils.UIUtil;
 
 /**
