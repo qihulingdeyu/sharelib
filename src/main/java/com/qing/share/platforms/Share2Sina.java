@@ -408,7 +408,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
     private void setMessage(final BaseRequest request) {
         registerToClient();
 
-        MLog.i("bbb", "mShareType：" + mShareType);
+        MLog.i(TAG, "mShareType：" + mShareType);
         boolean result = true;
         if (mShareType == SHARE_CLIENT) {
             if (isAppInstalled()) {
@@ -432,7 +432,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
 //                long ct = new Date().getTime();
 //                long abs = System.currentTimeMillis();//t - ct;
 //                String d2 = StringUtil.getDateTime("yyyyMMdd HHmmss", new Date(abs));
-//                MLog.i("bbb", System.currentTimeMillis()+", t:"+t+", 检查授权是否过期:"+d + ", ct:"+ ct+", abs:"+abs+" d2:"+d2);
+//                MLog.i(TAG, System.currentTimeMillis()+", t:"+t+", 检查授权是否过期:"+d + ", ct:"+ ct+", abs:"+abs+" d2:"+d2);
 
             }
 
@@ -444,7 +444,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
                         if (temp_OauthListener != null) {
                             temp_OauthListener.onOauthSuccess(sharePlatformType, bundle);
                         }
-                        MLog.i("bbb", "授权成功，继续执行分享...");
+                        MLog.i(TAG, "授权成功，继续执行分享...");
                         isAuthorize = false;
                         oauthInfo = getOauthInfo();
                         mWeiboShareAPI.sendRequest(getActivity(), request, mAuthInfo, oauthInfo.getAccessToken(), new AuthorListener());
@@ -494,7 +494,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        MLog.i("bbb", "--onActivityResult--requestCode:" + requestCode + ", resultCode:"+resultCode);
+        MLog.i(TAG, "--onActivityResult--requestCode:" + requestCode + ", resultCode:"+resultCode);
         // SSO 授权回调
         // 重要：发起 SSO 登陆的 Activity 必须重写 onActivityResults
         if (mSsoHandler != null) {
@@ -558,7 +558,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
         public void onComplete(Bundle bundle) {
             // 从 Bundle 中解析 Token
             mAccessToken = Oauth2AccessToken.parseAccessToken(bundle);
-            MLog.i("bbb", mAccessToken.toString());
+            MLog.i(TAG, mAccessToken.toString());
             //uid: 2502195515, access_token: 2.00L3x1jCP541qDc99d824d870U_izt, refresh_token: 2.00L3x1jCP541qD3745f9a8c4xKSAwC, phone_num: , expires_in: 1604127307737
             //从这里获取用户输入的 电话号码信息
             String phoneNum = mAccessToken.getPhoneNum();

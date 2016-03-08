@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.qing.log.MLog;
 import com.qing.share.SharePlatform;
@@ -22,8 +20,6 @@ import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 
-import java.util.ArrayList;
-
 /**
  * Created by zwq on 2015/11/04 17:45.<br/><br/>
  */
@@ -38,6 +34,7 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
 
     private Share2Tencent(Context context) {
         super(context);
+        platform_prefix = "qq_";
     }
 
     public static Share2Tencent getInstance(Context context) {
