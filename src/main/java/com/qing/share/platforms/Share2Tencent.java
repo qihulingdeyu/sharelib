@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.qing.log.MLog;
-import com.qing.share.SharePlatform;
-import com.qing.share.SharePlatformType;
 import com.qing.share.content.ImageObject;
 import com.qing.share.content.MediaObject;
 import com.qing.share.content.ShareObject;

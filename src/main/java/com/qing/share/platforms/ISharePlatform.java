@@ -1,4 +1,4 @@
-package com.qing.share;
+package com.qing.share.platforms;
 
 import android.content.Intent;
 

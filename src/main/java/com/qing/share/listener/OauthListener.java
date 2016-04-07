@@ -2,7 +2,7 @@ package com.qing.share.listener;
 
 import android.os.Bundle;
 
-import com.qing.share.SharePlatformType;
+import com.qing.share.platforms.SharePlatformType;
 
 /**
  * Created by zwq on 2015/11/02 18:21.<br/><br/>

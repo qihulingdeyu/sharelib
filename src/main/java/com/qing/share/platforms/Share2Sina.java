@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.qing.log.MLog;
-import com.qing.share.SharePlatform;
 import com.qing.share.content.MediaObject;
 import com.qing.share.OauthInfo;
 import com.qing.share.listener.OauthListener;
-import com.qing.share.SharePlatformType;
 import com.qing.share.Utils;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.MusicObject;

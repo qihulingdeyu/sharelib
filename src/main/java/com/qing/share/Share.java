@@ -15,7 +15,9 @@ import com.qing.share.listener.ShareListener;
 import com.qing.share.platforms.Share2Sina;
 import com.qing.share.platforms.Share2Tencent;
 import com.qing.share.platforms.Share2WeiXin;
-import com.qing.share.ui.ShareView;
+import com.qing.share.platforms.SharePlatform;
+import com.qing.share.platforms.SharePlatformType;
+import com.qing.sharelib.ui.ShareView;
 import com.qing.sharelib.R;
 import com.qing.sharelib.ShareDialogActivity;
 
@@ -108,8 +110,8 @@ public class Share {
                 platform.setShareConfig(appKey, appSecret, redirectUrl, scope);
                 shareList.put(sharePlatformType.getName(), platform);
             }else{
-                MLog.i(TAG, sharePlatformType.getEN_Name() + " platform not initialize");
-                throw new NullPointerException(sharePlatformType.getEN_Name()+" platform not initialize");
+                MLog.i(TAG, sharePlatformType.getEnName() + " platform not initialize");
+                throw new NullPointerException(sharePlatformType.getEnName()+" platform not initialize");
             }
 //            addItemView(platform);
         }
@@ -204,16 +206,16 @@ public class Share {
         switch (platform.getPlatformType()) {
             case QQ:
             case QZONE:
-                shareView.addItem(SharePlatformType.QQ.getType(), SharePlatformType.QQ.getCN_Name(), R.mipmap.share_qq_normal, R.mipmap.share_qq_pressed, mItemViewClickListener);
-                shareView.addItem(SharePlatformType.QZONE.getType(), SharePlatformType.QZONE.getCN_Name(), R.mipmap.share_qqkj_normal, R.mipmap.share_qqkj_pressed, mItemViewClickListener);
+                shareView.addItem(SharePlatformType.QQ.getType(), SharePlatformType.QQ.getCnName(), R.mipmap.share_qq_normal, R.mipmap.share_qq_pressed, mItemViewClickListener);
+                shareView.addItem(SharePlatformType.QZONE.getType(), SharePlatformType.QZONE.getCnName(), R.mipmap.share_qqkj_normal, R.mipmap.share_qqkj_pressed, mItemViewClickListener);
                 break;
             case WEIXIN:
             case WEIXIN_PYQ:
-                shareView.addItem(SharePlatformType.WEIXIN.getType(), SharePlatformType.WEIXIN.getCN_Name(), R.mipmap.share_weixin_normal, R.mipmap.share_weixin_pressed, mItemViewClickListener);
-                shareView.addItem(SharePlatformType.WEIXIN_PYQ.getType(), SharePlatformType.WEIXIN_PYQ.getCN_Name(), R.mipmap.share_weixinpyq_normal, R.mipmap.share_weixinpyq_pressed, mItemViewClickListener);
+                shareView.addItem(SharePlatformType.WEIXIN.getType(), SharePlatformType.WEIXIN.getCnName(), R.mipmap.share_weixin_normal, R.mipmap.share_weixin_pressed, mItemViewClickListener);
+                shareView.addItem(SharePlatformType.WEIXIN_PYQ.getType(), SharePlatformType.WEIXIN_PYQ.getCnName(), R.mipmap.share_weixinpyq_normal, R.mipmap.share_weixinpyq_pressed, mItemViewClickListener);
                 break;
             case SINA:
-                shareView.addItem(SharePlatformType.SINA.getType(), SharePlatformType.SINA.getCN_Name(), R.mipmap.share_sina_normal, R.mipmap.share_sina_pressed, mItemViewClickListener);
+                shareView.addItem(SharePlatformType.SINA.getType(), SharePlatformType.SINA.getCnName(), R.mipmap.share_sina_normal, R.mipmap.share_sina_pressed, mItemViewClickListener);
                 break;
             default:
                 break;

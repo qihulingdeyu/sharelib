@@ -1,4 +1,4 @@
-package com.qing.share;
+package com.qing.share.platforms;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,12 +7,12 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.qing.share.OauthInfo;
 import com.qing.share.content.ImageObject;
 import com.qing.share.content.MediaObject;
 import com.qing.share.content.TextObject;
 import com.qing.share.listener.OauthListener;
 import com.qing.share.listener.ShareListener;
-import com.qing.sharelib.R;
 
 /**
  * Created by zwq on 2015/10/30 11:52.<br/><br/>

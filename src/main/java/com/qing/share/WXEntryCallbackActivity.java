@@ -1,14 +1,11 @@
-package com.qing.sharelib;
+package com.qing.share;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.qing.log.MLog;
-import com.qing.share.KeyInfo;
-import com.qing.share.Share;
-import com.qing.share.SharePlatformType;
+import com.qing.share.platforms.SharePlatformType;
 import com.qing.share.listener.ShareListener;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;

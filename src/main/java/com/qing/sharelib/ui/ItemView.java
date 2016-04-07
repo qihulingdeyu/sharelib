@@ -1,4 +1,4 @@
-package com.qing.share.ui;
+package com.qing.sharelib.ui;
 
 import android.content.Context;
 import android.view.Gravity;

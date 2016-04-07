@@ -12,6 +12,8 @@ public abstract class ShareObject {
     public static final int TYPE_IMAGE = 1;//1：图片
     public static final int TYPE_MEDIA = 2;//2：其它多媒体
 
+    private final String defaultActionUrl = "http://www.baidu.com/";//默认的点击跳转链接
+
     protected int objcetType;
 
     protected String identify;
@@ -59,7 +61,7 @@ public abstract class ShareObject {
 
     public String getActionUrl() {
         if (TextUtils.isEmpty(actionUrl) || !actionUrl.startsWith("http://")) {
-            actionUrl = "http://www.baidu.com/";
+            actionUrl = defaultActionUrl;
         }
         return actionUrl;
     }

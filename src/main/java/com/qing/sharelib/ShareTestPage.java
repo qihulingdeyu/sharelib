@@ -13,9 +13,9 @@ import android.widget.LinearLayout;
 
 import com.qing.log.MLog;
 import com.qing.qlib.LinearLayoutPage;
-import com.qing.share.SharePlatform;
+import com.qing.share.platforms.SharePlatform;
 import com.qing.share.Share;
-import com.qing.share.SharePlatformType;
+import com.qing.share.platforms.SharePlatformType;
 import com.qing.share.content.ImageObject;
 import com.qing.share.content.MediaObject;
 import com.qing.share.content.ShareObject;
