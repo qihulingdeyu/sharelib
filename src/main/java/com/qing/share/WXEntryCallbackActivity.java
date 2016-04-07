@@ -92,10 +92,10 @@ public abstract class WXEntryCallbackActivity extends Activity implements IWXAPI
                     mShareListener.onShareCancel();
                     break;
                 case BaseResp.ErrCode.ERR_AUTH_DENIED:
-                    mShareListener.onShareFail("msg:"+baseResp.errStr);
+                    mShareListener.onShareFail(baseResp.errCode, "msg:"+baseResp.errStr);
                     break;
                 default:
-                    mShareListener.onShareFail("code:"+baseResp.errCode+", msg:"+baseResp.errStr);
+                    mShareListener.onShareFail(baseResp.errCode, "code:"+baseResp.errCode+", msg:"+baseResp.errStr);
                     break;
             }
         }

@@ -10,6 +10,7 @@ import com.qing.share.content.ImageObject;
 import com.qing.share.content.MediaObject;
 import com.qing.share.content.ShareObject;
 import com.qing.share.content.TextObject;
+import com.qing.share.listener.ShareListener;
 import com.tencent.connect.common.Constants;
 import com.tencent.connect.share.QQShare;
 import com.tencent.connect.share.QzonePublish;
@@ -209,7 +210,7 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
                 String imagePath = messageBundle.getString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL);
                 if (TextUtils.isEmpty(imagePath)) {
                     if (mShareListener != null) {
-                        mShareListener.onShareFail("图片路径不能为空");
+                        mShareListener.onShareFail(ShareListener.CODE_OTHER, "图片路径不能为空");
                     }
                     return;
                 }
@@ -217,7 +218,7 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
                 String imageUrl = messageBundle.getString(QQShare.SHARE_TO_QQ_IMAGE_URL);
                 if (!TextUtils.isEmpty(imageUrl)) {
                     if (mShareListener != null) {
-                        mShareListener.onShareFail("纯图分享只支持本地图片");
+                        mShareListener.onShareFail(ShareListener.CODE_OTHER, "纯图分享只支持本地图片");
                     }
                     return;
                 }
@@ -270,7 +271,7 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
     public void onError(UiError uiError) {
         MLog.i(TAG, "--onError--");
         if (mShareListener != null) {
-            mShareListener.onShareFail(uiError.toString());
+            mShareListener.onShareFail(uiError.errorCode, uiError.toString());
         }
     }
 

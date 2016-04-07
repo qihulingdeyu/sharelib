@@ -194,7 +194,7 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
         }
 
         @Override
-        public void onOauthFail(String msg) {
+        public void onOauthFail(int code, String msg) {
             MLog.i(TAG, "---onOauthFail---"+msg);
         }
 
@@ -211,7 +211,7 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
         }
 
         @Override
-        public void onShareFail(String msg) {
+        public void onShareFail(int code, String msg) {
             MLog.i(TAG, "---onShareFail---"+msg);
         }
 

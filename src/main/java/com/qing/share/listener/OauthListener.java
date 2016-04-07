@@ -10,9 +10,15 @@ import com.qing.share.platforms.SharePlatformType;
  */
 public interface OauthListener {
 
-    /** 授权成功 */
+    public static final int CODE_OTHER = 0;
+
+    /**
+     * 授权成功
+     */
     void onOauthSuccess(SharePlatformType sharePlatformType, Bundle bundle);
-    void onOauthFail(String msg);
+
+    void onOauthFail(int code, String msg);
+
     void onOauthCancel();
 
 }

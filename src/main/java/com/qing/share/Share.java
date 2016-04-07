@@ -17,16 +17,16 @@ import com.qing.share.platforms.Share2Tencent;
 import com.qing.share.platforms.Share2WeiXin;
 import com.qing.share.platforms.SharePlatform;
 import com.qing.share.platforms.SharePlatformType;
-import com.qing.sharelib.ui.ShareView;
 import com.qing.sharelib.R;
 import com.qing.sharelib.ShareDialogActivity;
+import com.qing.sharelib.ui.ShareView;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * Created by zwq on 2015/08/26 17:07.<br/><br/>
- *
+ * <p/>
  * <activity android:name="com.qing.sharelib.ShareDialogActivity"
  * android:theme="@style/share_dialog" />
  */
@@ -48,10 +48,10 @@ public class Share {
     private OauthListener mOauthListener;
     private ShareObject mShareObject;
 
-    public static Share getInstance(Context context){
-        if(instance==null){
-            synchronized (Share.class){
-                if (instance==null){
+    public static Share getInstance(Context context) {
+        if (instance == null) {
+            synchronized (Share.class) {
+                if (instance == null) {
                     instance = new Share(context);
                 }
             }
@@ -59,16 +59,17 @@ public class Share {
         return instance;
     }
 
-    private Share(){}
+    private Share() {
+    }
 
-    private Share(Context context){
+    private Share(Context context) {
         mActivity = (Activity) context;
         shareList = new LinkedHashMap<String, SharePlatform>();
         keyInfoList = new LinkedHashMap<SharePlatformType, KeyInfo>();
         MLog.setDebugMode(true);
     }
 
-    public void addShare(SharePlatformType sharePlatformType, String appKey, String appSecret, String redirectUrl, String scope){
+    public void addShare(SharePlatformType sharePlatformType, String appKey, String appSecret, String redirectUrl, String scope) {
         if (!keyInfoList.containsKey(sharePlatformType)) {
             keyInfoList.put(sharePlatformType, new KeyInfo(appKey, appSecret, redirectUrl, scope));
         }
@@ -85,13 +86,13 @@ public class Share {
         }
     }
 
-    private void initShare(SharePlatformType sharePlatformType, String appKey, String appSecret, String redirectUrl, String scope){
+    private void initShare(SharePlatformType sharePlatformType, String appKey, String appSecret, String redirectUrl, String scope) {
         if (shareList == null) {
             shareList = new LinkedHashMap<String, SharePlatform>();
         }
         if (!shareList.containsKey(sharePlatformType.getName())) {
             SharePlatform platform = null;
-            switch (sharePlatformType){
+            switch (sharePlatformType) {
                 case QQ:
                 case QZONE:
                     platform = Share2Tencent.getInstance(mContext);
@@ -109,9 +110,9 @@ public class Share {
             if (platform != null) {
                 platform.setShareConfig(appKey, appSecret, redirectUrl, scope);
                 shareList.put(sharePlatformType.getName(), platform);
-            }else{
+            } else {
                 MLog.i(TAG, sharePlatformType.getEnName() + " platform not initialize");
-                throw new NullPointerException(sharePlatformType.getEnName()+" platform not initialize");
+                throw new NullPointerException(sharePlatformType.getEnName() + " platform not initialize");
             }
 //            addItemView(platform);
         }
@@ -123,7 +124,7 @@ public class Share {
 
     /**
      * @param sharePlatformType
-     * @param initRes 是否初始化资源
+     * @param initRes           是否初始化资源
      * @return
      */
     public SharePlatform getSharePlatform(SharePlatformType sharePlatformType, boolean initRes) {
@@ -135,7 +136,7 @@ public class Share {
                     platform.initAllRes();
                     currentPlatformType = sharePlatformType;
                 }
-            }else{
+            } else {
                 throw new NullPointerException("Has not been initialized configuration");
             }
         }
@@ -197,7 +198,7 @@ public class Share {
 
     private void addItemView(SharePlatform platform) {
         if (platform == null) return;
-        if (shareView == null){
+        if (shareView == null) {
             shareView = new ShareView(mContext);
         }
         if (mItemViewClickListener == null) {
@@ -224,7 +225,7 @@ public class Share {
 
     private void addItemView(SharePlatformType sharePlatformType, View itemView) {
         if (itemView == null) return;
-        if (shareView == null){
+        if (shareView == null) {
             shareView = new ShareView(mContext);
         }
         if (mItemViewClickListener == null) {
@@ -250,37 +251,37 @@ public class Share {
         public void onClick(View v) {
 //            MLog.i(TAG, "onClick  id:"+v.getId());
             SharePlatform sharePlatform = null;
-            if (v.getId() == SharePlatformType.QQ.getType()){
+            if (v.getId() == SharePlatformType.QQ.getType()) {
                 sharePlatform = getSharePlatform(SharePlatformType.QQ);
                 sharePlatform.setSendMessageToWhere(0);
 
-            } else if (v.getId() == SharePlatformType.QZONE.getType()){
+            } else if (v.getId() == SharePlatformType.QZONE.getType()) {
                 sharePlatform = getSharePlatform(SharePlatformType.QQ);
                 sharePlatform.setSendMessageToWhere(1);
 
-            } else if (v.getId() == SharePlatformType.WEIXIN.getType()){
+            } else if (v.getId() == SharePlatformType.WEIXIN.getType()) {
                 sharePlatform = getSharePlatform(SharePlatformType.WEIXIN);
                 sharePlatform.setSendMessageToWhere(0);
 
-            } else if (v.getId() == SharePlatformType.WEIXIN_PYQ.getType()){
+            } else if (v.getId() == SharePlatformType.WEIXIN_PYQ.getType()) {
                 sharePlatform = getSharePlatform(SharePlatformType.WEIXIN);
                 sharePlatform.setSendMessageToWhere(1);
 
-            } else if (v.getId() == SharePlatformType.SINA.getType()){
+            } else if (v.getId() == SharePlatformType.SINA.getType()) {
                 sharePlatform = getSharePlatform(SharePlatformType.SINA);
             }
             if (sharePlatform == null) {
                 MLog.i(TAG, "SharePlatform is null!");
                 if (mShareListener != null) {
-                    mShareListener.onShareFail("SharePlatform is null!");
+                    mShareListener.onShareFail(ShareListener.CODE_OTHER, "SharePlatform is null!");
                 }
-            }else{
+            } else {
                 if (mShareObject == null) {
                     MLog.i(TAG, "ShareObject is null!");
                     if (mShareListener != null) {
-                        mShareListener.onShareFail("ShareObject is null!");
+                        mShareListener.onShareFail(ShareListener.CODE_OTHER, "ShareObject is null!");
                     }
-                }else{
+                } else {
 //                MLog.i(TAG, "onClick  sharePlatform type:" + sharePlatform.getPlatformType().getName()+", ObjcetType:"+mShareObject.getObjcetType());
                     switch (mShareObject.getObjcetType()) {
                         case ShareObject.TYPE_TEXT:

@@ -12,6 +12,7 @@ import com.qing.share.Utils;
 import com.qing.share.content.ImageObject;
 import com.qing.share.content.MediaObject;
 import com.qing.share.content.TextObject;
+import com.qing.share.listener.ShareListener;
 import com.qing.utils.ThreadUtil;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
@@ -253,7 +254,7 @@ public class Share2WeiXin extends SharePlatform implements IWXAPIEventHandler {
 
             if (bitmap == null || bitmap.isRecycled()) {
                 if (mShareListener != null) {
-                    mShareListener.onShareFail("bitmap is null");
+                    mShareListener.onShareFail(ShareListener.CODE_OTHER, "bitmap is null");
                 }
                 imgObj = null;
                 return false;
@@ -369,7 +370,7 @@ public class Share2WeiXin extends SharePlatform implements IWXAPIEventHandler {
             msg = "IWXAPI object or SendMessageToWX.Req object is null";
         }
         if (msg != null && mShareListener != null) {
-            mShareListener.onShareFail(msg);
+            mShareListener.onShareFail(ShareListener.CODE_OTHER, msg);
         }
     }
 
@@ -380,7 +381,7 @@ public class Share2WeiXin extends SharePlatform implements IWXAPIEventHandler {
             return;
         needSendMessage = 0;
         if (mShareListener != null) {
-            mShareListener.onShareFail("微信没有发送多种信息的功能，此方法未实现");
+            mShareListener.onShareFail(ShareListener.CODE_OTHER, "微信没有发送多种信息的功能，此方法未实现");
         }
     }
 

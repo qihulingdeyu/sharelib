@@ -10,6 +10,7 @@ import com.qing.share.content.MediaObject;
 import com.qing.share.OauthInfo;
 import com.qing.share.listener.OauthListener;
 import com.qing.share.Utils;
+import com.qing.share.listener.ShareListener;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.MusicObject;
 import com.sina.weibo.sdk.api.TextObject;
@@ -366,7 +367,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
             }
         }
         if (msg != null && mShareListener != null) {
-            mShareListener.onShareFail(msg);
+            mShareListener.onShareFail(ShareListener.CODE_OTHER, msg);
         }
     }
 
@@ -399,7 +400,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
             }
         }
         if (msg != null && mShareListener != null) {
-            mShareListener.onShareFail(msg);
+            mShareListener.onShareFail(ShareListener.CODE_OTHER, msg);
         }
     }
 
@@ -413,7 +414,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
                 result = mWeiboShareAPI.sendRequest(getActivity(), request);
             }else{
                 if (mShareListener != null) {
-                    mShareListener.onShareFail("未安装客户端");
+                    mShareListener.onShareFail(ShareListener.CODE_OTHER, "未安装客户端");
                 }
                 return;
             }
@@ -448,12 +449,12 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
                         mWeiboShareAPI.sendRequest(getActivity(), request, mAuthInfo, oauthInfo.getAccessToken(), new AuthorListener());
                     }
                     @Override
-                    public void onOauthFail(String msg) {
+                    public void onOauthFail(int code, String msg) {
                         if (temp_OauthListener != null) {
-                            temp_OauthListener.onOauthFail(msg);
+                            temp_OauthListener.onOauthFail(OauthListener.CODE_OTHER, msg);
                         }
                         if (mShareListener != null) {
-                            mShareListener.onShareFail("授权失败："+msg);
+                            mShareListener.onShareFail(ShareListener.CODE_OTHER, "授权失败："+msg);
                         }
                     }
                     @Override
@@ -462,7 +463,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
                             temp_OauthListener.onOauthCancel();
                         }
                         if (mShareListener != null) {
-                            mShareListener.onShareFail("取消授权");
+                            mShareListener.onShareFail(ShareListener.CODE_OTHER, "取消授权");
                         }
                     }
                 };
@@ -473,7 +474,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
             }
         }
         if (!result && mShareListener != null) {
-            mShareListener.onShareFail("分享失败，可能是未注册Activity：com.sina.weibo.sdk.component.WeiboSdkBrowser");
+            mShareListener.onShareFail(ShareListener.CODE_OTHER, "分享失败，可能是未注册Activity：com.sina.weibo.sdk.component.WeiboSdkBrowser");
         }
     }
 
@@ -517,7 +518,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
         // 保存从微博客户端唤起第三方应用时，客户端发送过来的请求数据对象
         // baseRequest一直都是空的
         if (!shareSuccess && mShareListener != null) {
-            mShareListener.onShareFail("分享失败");
+            mShareListener.onShareFail(ShareListener.CODE_OTHER, "分享失败");
         }
         shareSuccess = false;
     }
@@ -544,7 +545,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
                 break;
             case WBConstants.ErrorCode.ERR_FAIL:
                 if (mShareListener != null) {
-                    mShareListener.onShareFail(baseResp.errCode +", "+ baseResp.errMsg);
+                    mShareListener.onShareFail(baseResp.errCode, baseResp.errCode +", "+ baseResp.errMsg);
                 }
                 break;
         }
@@ -585,9 +586,9 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
                 String message = "code-->"+bundle.getString("code");
                 if (isAuthorize && mOauthListener != null) {
                     isAuthorize = false;
-                    mOauthListener.onOauthFail("message:"+message);
+                    mOauthListener.onOauthFail(OauthListener.CODE_OTHER, "message:"+message);
                 }else if (mShareListener != null) {
-                    mShareListener.onShareFail("message:"+message);
+                    mShareListener.onShareFail(ShareListener.CODE_OTHER, "message:"+message);
                 }
             }
         }
@@ -595,9 +596,9 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
         public void onWeiboException(WeiboException e) {
             if (isAuthorize && mOauthListener != null) {
                 isAuthorize = false;
-                mOauthListener.onOauthFail(e.getMessage());
+                mOauthListener.onOauthFail(OauthListener.CODE_OTHER, e.getMessage());
             }else if (mShareListener != null) {
-                mShareListener.onShareFail(e.getMessage());
+                mShareListener.onShareFail(ShareListener.CODE_OTHER, e.getMessage());
             }
         }
 

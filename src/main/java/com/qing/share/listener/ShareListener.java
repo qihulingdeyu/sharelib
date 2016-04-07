@@ -10,8 +10,14 @@ import com.qing.share.platforms.SharePlatformType;
  */
 public interface ShareListener {
 
-    /** 分享成功 */
+    public static final int CODE_OTHER = 0;
+
+    /**
+     * 分享成功
+     */
     void onShareSuccess(SharePlatformType sharePlatformType, Bundle bundle);
-    void onShareFail(String msg);
+
+    void onShareFail(int code, String msg);
+
     void onShareCancel();
 }
