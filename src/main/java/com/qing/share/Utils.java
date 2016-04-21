@@ -220,7 +220,7 @@ public class Utils {
         } else if (data.getAction() != null && data.getAction().equals("inline-data")) {
 
             try {
-                final String fileName = StringUtil.getMD5(DateFormat.format("yyyy-MM-dd-HH-mm-ss", System.currentTimeMillis()).toString());//.getBytes()) + Util.PHOTO_DEFAULT_EXT;
+                final String fileName = StringUtil.getStringMD5(DateFormat.format("yyyy-MM-dd-HH-mm-ss", System.currentTimeMillis()).toString());//.getBytes()) + Util.PHOTO_DEFAULT_EXT;
                 filePath = dir + fileName;
 
                 final Bitmap bitmap = (Bitmap) data.getExtras().get("data");
