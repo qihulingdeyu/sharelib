@@ -282,8 +282,8 @@ public class Share {
                         mShareListener.onShareFail(ShareListener.CODE_OTHER, "ShareObject is null!");
                     }
                 } else {
-//                MLog.i(TAG, "onClick  sharePlatform type:" + sharePlatform.getPlatformType().getName()+", ObjcetType:"+mShareObject.getObjcetType());
-                    switch (mShareObject.getObjcetType()) {
+//                MLog.i(TAG, "onClick  sharePlatform type:" + sharePlatform.getPlatformType().getName()+", ObjcetType:"+mShareObject.getObjectType());
+                    switch (mShareObject.getObjectType()) {
                         case ShareObject.TYPE_TEXT:
                             sharePlatform.shareText((TextObject) mShareObject);
                             break;

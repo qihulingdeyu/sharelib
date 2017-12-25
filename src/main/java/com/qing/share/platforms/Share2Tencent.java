@@ -108,7 +108,7 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
 //        textBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
 
         messageBundle = textBundle;
-        currentMessageObjectType = textObject.getObjcetType();
+        currentMessageObjectType = textObject.getObjectType();
     }
 
     @Override
@@ -125,7 +125,7 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
 //        textBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
 
         messageBundle = textBundle;
-        currentMessageObjectType = textObject.getObjcetType();
+        currentMessageObjectType = textObject.getObjectType();
     }
 
     @Override
@@ -148,7 +148,7 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
 //        imageBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
 
         messageBundle = imageBundle;
-        currentMessageObjectType = imageObject.getObjcetType();
+        currentMessageObjectType = imageObject.getObjectType();
     }
 
     @Override
@@ -175,7 +175,7 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
 //        musicBundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, mExtarFlag);
 
         messageBundle = musicBundle;
-        currentMessageObjectType = mediaObject.getObjcetType();
+        currentMessageObjectType = mediaObject.getObjectType();
     }
 
     @Override
@@ -194,7 +194,7 @@ public class Share2Tencent extends SharePlatform implements IUiListener {
 //        videoBundle.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imageUrls);
 
         messageBundle = videoBundle;
-        currentMessageObjectType = mediaObject.getObjcetType();
+        currentMessageObjectType = mediaObject.getObjectType();
     }
 
     @Override

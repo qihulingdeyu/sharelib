@@ -5,17 +5,15 @@ package com.qing.share.content;
  */
 public class TextObject extends ShareObject {
 
-    private static final String TAG = TextObject.class.getName();
-
     private String text;//文本
 
     public TextObject() {
-        objcetType = TYPE_TEXT;
+
     }
 
     @Override
-    public int getObjcetType() {
-        return objcetType;
+    public int getObjectType() {
+        return TYPE_TEXT;
     }
 
     public String getText() {

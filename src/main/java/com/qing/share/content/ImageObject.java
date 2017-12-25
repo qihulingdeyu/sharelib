@@ -7,18 +7,17 @@ import android.graphics.Bitmap;
  */
 public class ImageObject extends ShareObject {
 
-    private static final String TAG = ImageObject.class.getName();
     private String path;//SD卡路径
     private String url;//网络地址
     private Bitmap bitmap;
 
     public ImageObject() {
-        objcetType = TYPE_IMAGE;
+
     }
 
     @Override
-    public int getObjcetType() {
-        return objcetType;
+    public int getObjectType() {
+        return TYPE_IMAGE;
     }
 
     public Bitmap getBitmap() {

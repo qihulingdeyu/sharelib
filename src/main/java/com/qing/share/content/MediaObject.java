@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
  */
 public class MediaObject extends ShareObject {
 
-    private static final String TAG = MediaObject.class.getName();
     private Bitmap thumb;//缩略图
     private String thumbUrl;
     private String dataUrl;//数据源地址:sd卡目录、网络地址
@@ -16,12 +15,12 @@ public class MediaObject extends ShareObject {
     private String defaultText;//默认文本
 
     public MediaObject() {
-        objcetType = TYPE_MEDIA;
+
     }
 
     @Override
-    public int getObjcetType() {
-        return objcetType;
+    public int getObjectType() {
+        return TYPE_MEDIA;
     }
 
     public String getDataHdUrl() {

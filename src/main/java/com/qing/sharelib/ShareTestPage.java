@@ -165,8 +165,8 @@ public class ShareTestPage extends LinearLayoutPage implements View.OnClickListe
             }
             if(shareObject != null) {
 //            if(shareObject != null && sharePlatform != null) {
-//                MLog.i(TAG, "onCheckedChanged  sharePlatform type:" + sharePlatform.getPlatformType().getName()+", ObjcetType:"+shareObject.getObjcetType());
-//                switch (shareObject.getObjcetType()) {
+//                MLog.i(TAG, "onCheckedChanged  sharePlatform type:" + sharePlatform.getPlatformType().getName()+", ObjcetType:"+shareObject.getObjectType());
+//                switch (shareObject.getObjectType()) {
 //                    case 0:
 //                        sharePlatform.shareText((TextObject) shareObject);
 //                        break;

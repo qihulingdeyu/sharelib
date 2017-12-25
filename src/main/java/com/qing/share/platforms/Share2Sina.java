@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.qing.log.MLog;
-import com.qing.share.content.MediaObject;
 import com.qing.share.OauthInfo;
-import com.qing.share.listener.OauthListener;
 import com.qing.share.Utils;
+import com.qing.share.content.MediaObject;
+import com.qing.share.listener.OauthListener;
 import com.qing.share.listener.ShareListener;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.MusicObject;
@@ -211,7 +211,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
 
         initWeiboMultiMessage();
         weiboMultiMessage.textObject = sinaTextObject;
-        currentMessageObjectType = textObject.getObjcetType();
+        currentMessageObjectType = textObject.getObjectType();
     }
 
     /**
@@ -230,7 +230,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
 
         initWeiboMultiMessage();
         weiboMultiMessage.imageObject = sinaImageObject;
-        currentMessageObjectType = imageObject.getObjcetType();
+        currentMessageObjectType = imageObject.getObjectType();
     }
 
     @Override
@@ -247,7 +247,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
 
         initWeiboMultiMessage();
         weiboMultiMessage.mediaObject = sinaMediaObject;
-        currentMessageObjectType = mediaObject.getObjcetType();
+        currentMessageObjectType = mediaObject.getObjectType();
     }
 
     @Override
@@ -269,7 +269,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
 
         initWeiboMultiMessage();
         weiboMultiMessage.mediaObject = musicObject;
-        currentMessageObjectType = mediaObject.getObjcetType();
+        currentMessageObjectType = mediaObject.getObjectType();
     }
 
     @Override
@@ -293,7 +293,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
 
         initWeiboMultiMessage();
         weiboMultiMessage.mediaObject = videoObject;
-        currentMessageObjectType = mediaObject.getObjcetType();
+        currentMessageObjectType = mediaObject.getObjectType();
     }
 
     @Override
@@ -315,7 +315,7 @@ public class Share2Sina extends SharePlatform implements IWeiboHandler.Response,
 
         initWeiboMultiMessage();
         weiboMultiMessage.mediaObject = voiceObject;
-        currentMessageObjectType = mediaObject.getObjcetType();
+        currentMessageObjectType = mediaObject.getObjectType();
     }
 
     /**

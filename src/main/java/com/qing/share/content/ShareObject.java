@@ -7,14 +7,11 @@ import android.text.TextUtils;
  */
 public abstract class ShareObject {
 
-    private static final String TAG = ShareObject.class.getName();
     public static final int TYPE_TEXT = 0;//0：文本
     public static final int TYPE_IMAGE = 1;//1：图片
     public static final int TYPE_MEDIA = 2;//2：其它多媒体
 
     private final String defaultActionUrl = "http://www.baidu.com/";//默认的点击跳转链接
-
-    protected int objcetType;
 
     protected String identify;
     protected String title;
@@ -30,7 +27,7 @@ public abstract class ShareObject {
      * 0：文本，1：图片，2：其它多媒体
      * @return
      */
-    public abstract int getObjcetType();
+    public abstract int getObjectType();
 
     public String getIdentify() {
         return identify;
